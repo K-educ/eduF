@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { RouterModule } from "@angular/router";
 
 @Component({
-  selector: 'app-student-profile',
+  selector: "app-student-profile",
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
@@ -19,7 +19,7 @@ import { RouterModule } from '@angular/router';
       </ul>
     </nav>
     <div class="profile-container">
-      <h2>Mon Profil</h2>
+      <h2>Mon Profil :</h2>
       <div *ngIf="user">
         <p><strong>Nom :</strong> {{ user.name }}</p>
         <p><strong>Email :</strong> {{ user.email }}</p>
@@ -93,13 +93,13 @@ export class StudentProfileComponent implements OnInit {
   user: any = null;
 
   ngOnInit(): void {
-    const storedUser = localStorage.getItem('user');
+    const storedUser = localStorage.getItem("user");
     if (storedUser) {
       this.user = JSON.parse(storedUser);
     }
   }
   logout() {
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
     // tu peux ajouter un redirect vers la page de login si besoin
   }
 }
