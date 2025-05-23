@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { ChangeDetectorRef } from "@angular/core";
 
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule } from "@angular/router";
 
 @Component({
-  selector: 'app-favorites',
+  selector: "app-favorites",
   standalone: true,
   imports: [CommonModule, RouterModule, HttpClientModule],
   template: `
@@ -22,7 +22,7 @@ import { Router, RouterModule } from '@angular/router';
       </ul>
     </nav>
     <div class="home-container">
-      <h2>Mes favoris ❤️</h2>
+      <h2>Mes favoris ❤️ :</h2>
       <ul class="course-list">
         <li *ngFor="let fav of favoris">
           <h4>{{ fav.titre }}</h4>
@@ -93,7 +93,7 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class FavoritesComponent implements OnInit {
   favoris: any[] = [];
-  userId: string = '';
+  userId: string = "";
 
   constructor(
     private http: HttpClient,
@@ -102,7 +102,7 @@ export class FavoritesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem("user");
     if (user) {
       this.userId = JSON.parse(user).id;
 
@@ -115,13 +115,13 @@ export class FavoritesComponent implements OnInit {
             this.favoris = res;
           },
           error: (err) => {
-            console.error('Erreur lors du chargement des favoris :', err);
+            console.error("Erreur lors du chargement des favoris :", err);
           },
         });
     }
   }
   removeFavori(userId: string, coursId: string) {
-    if (confirm('Voulez-vous vraiment retirer ce favori ?')) {
+    if (confirm("Voulez-vous vraiment retirer ce favori ?")) {
       this.http
         .delete(`http://localhost:8082/api/favoris/supprimer`, {
           params: {
@@ -135,7 +135,7 @@ export class FavoritesComponent implements OnInit {
             this.loadFavoris();
           },
           error: (err) => {
-            console.error('Erreur suppression favori :', err);
+            console.error("Erreur suppression favori :", err);
           },
         });
     }
@@ -150,12 +150,12 @@ export class FavoritesComponent implements OnInit {
           this.favoris = res;
         },
         error: (err) => {
-          console.error('Erreur lors du chargement des favoris :', err);
+          console.error("Erreur lors du chargement des favoris :", err);
         },
       });
   }
   logout(): void {
-    localStorage.removeItem('user');
-    this.router.navigate(['/']);
+    localStorage.removeItem("user");
+    this.router.navigate(["/"]);
   }
 }
