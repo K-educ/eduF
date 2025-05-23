@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-login',
+  selector: "app-login",
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
     <div class="login-container">
-      <h2>Se connecter</h2>
+      <h2>Se connecter :</h2>
       <form (ngSubmit)="loginUser()" class="login-form">
         <label for="email">Email</label>
         <input [(ngModel)]="user.email" name="email" type="email" required />
@@ -87,24 +87,24 @@ import { Router } from '@angular/router';
   ],
 })
 export class LoginComponent {
-  user = { email: '', password: '' };
-  message = '';
+  user = { email: "", password: "" };
+  message = "";
 
   constructor(private http: HttpClient, private router: Router) {}
 
   loginUser() {
-    this.http.post<any>('http://localhost:8000/login', this.user).subscribe({
+    this.http.post<any>("http://localhost:8000/login", this.user).subscribe({
       next: (res) => {
         if (res.user) {
-          this.message = res.message || 'Connexion réussie';
-          localStorage.setItem('user', JSON.stringify(res.user)); // Important !
-          this.router.navigate(['/student-home']);
+          this.message = res.message || "Connexion réussie";
+          localStorage.setItem("user", JSON.stringify(res.user)); // Important !
+          this.router.navigate(["/student-home"]);
         } else {
-          this.message = res.error || 'Email ou mot de passe incorrect';
+          this.message = res.error || "Email ou mot de passe incorrect";
         }
       },
       error: (err) => {
-        this.message = 'Erreur: ' + (err.error?.error || err.message);
+        this.message = "Erreur: " + (err.error?.error || err.message);
       },
     });
   }
